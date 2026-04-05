@@ -4,7 +4,7 @@
 
 Claude Code resets completely between sessions — no memory of what you did, what decisions were made, or what's next. And during long sessions, context silently fills up until earlier details get compressed away, taking unsaved progress with them.
 
-This kit provides 4 hooks and a set of templates that give Claude Code session continuity and context awareness. Developed across 92 sessions and 128 hours of real project work.
+This kit provides 4 hooks and a set of templates that give Claude Code session continuity and context awareness. Developed across dozens of real sessions building actual projects.
 
 ## What's inside
 
@@ -60,13 +60,13 @@ Then add session management instructions to your `CLAUDE.md`. See [full-walkthro
 
 **Pick and choose:** Each component works independently. You can install just the context monitor, just the session handoff, or both. See individual READMEs for standalone setup.
 
-## Real numbers
+## Why this exists
 
-These hooks were developed during a real project — a mobile game built from scratch by a non-engineer working with Claude Code across 92 sessions:
+These hooks were developed during a real project — a mobile game built from scratch by a non-engineer working with Claude Code across dozens of sessions:
 
-- **23 hours saved** — estimated time that would have been lost to manual context rebuilding (15 min × 92 sessions)
-- **10+ forgotten handoffs caught** — the handoff validator flagged incomplete session-state.md files that would have caused the next session to start blind
-- **3 hard stops** — the context monitor forced handoffs at 70% that would otherwise have lost in-progress work to context truncation
+- **Hours saved** — no more manually rebuilding context at the start of every session
+- **Forgotten handoffs caught** — the handoff validator flags incomplete session-state.md files that would cause the next session to start blind
+- **Hard stops that saved work** — the context monitor forced handoffs at 70% that would otherwise have lost in-progress work to context truncation
 
 ## How it works
 

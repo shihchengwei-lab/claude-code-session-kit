@@ -57,4 +57,4 @@ Add to `.claude/settings.local.json`:
 
 ## How thresholds were calibrated
 
-The 400/600/700KB thresholds are based on observed transcript sizes across 90+ sessions. They're conservative — you'll get warnings before things get critical. If you're using a model with a larger context window, you may want to raise them.
+The 400/600/700KB thresholds are based on observed transcript sizes across dozens of sessions. They're conservative — you'll get warnings before things get critical. If you're using a model with a larger context window, you may want to raise them.

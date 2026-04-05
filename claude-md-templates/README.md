@@ -2,7 +2,7 @@
 
 `CLAUDE.md` is the instruction file Claude Code reads at the start of every session. It's the most powerful configuration you have — but most people either skip it or write one that's too vague to be useful.
 
-These templates are extracted from real projects (92+ sessions across game development, financial analysis, and multi-agent systems). They're opinionated and practical.
+These templates are extracted from real projects (dozens of sessions across game development, financial analysis, and multi-agent systems). They're opinionated and practical.
 
 ## Which template to use
 

@@ -2,7 +2,7 @@
 
 Claude Code has no memory between sessions. Every new conversation is a complete reset. If your last session ended mid-task, the AI has no idea what you were doing, what decisions were made, or what's next.
 
-The cost: across 92 sessions, rebuilding context manually would have wasted ~23 hours (15 minutes per session). Worse, verbal rebuilding is error-prone — the AI might redo work, contradict earlier decisions, or lose track of what's been tested.
+The cost: rebuilding context manually takes ~15 minutes per session. Over dozens of sessions, that adds up fast. Worse, verbal rebuilding is error-prone — the AI might redo work, contradict earlier decisions, or lose track of what's been tested.
 
 These hooks automate the handoff:
 

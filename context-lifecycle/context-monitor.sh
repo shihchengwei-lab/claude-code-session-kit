@@ -4,7 +4,7 @@
 # Three-tier alert system: 40% (warn) → 60% (alert) → 70% (hard stop).
 #
 # The 70% hard gate forces a session handoff — no exceptions.
-# Developed across 92 sessions where 3 hard stops would have lost work without this.
+# Developed across dozens of real sessions — hard stops have saved work multiple times.
 #
 # Hook type: PostToolUse (matcher: ".*")
 # Timeout: 5s
