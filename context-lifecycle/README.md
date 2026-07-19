@@ -18,7 +18,7 @@ The 70% gate is non-negotiable. Without it, the AI will happily keep working unt
 
 ## pre-compact-reminder.sh (PreCompact)
 
-Fires when Claude Code is about to compress context. Reminds the AI to save critical state to `session-state.md` before compression wipes early conversation details.
+Fires when Claude Code is about to compress context. Shows the user a reminder to make sure critical state is saved to `session-state.md` before compression wipes early conversation details. (PreCompact can't inject context into the model, so the reminder targets the user — the one channel this event actually supports.)
 
 ## Setup
 

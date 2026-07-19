@@ -12,6 +12,14 @@
 # Hook type: Stop
 # Timeout: 10s
 
+INPUT=$(cat)
+
+# If we're already continuing from a previous Stop-hook block, stay silent
+# to avoid an infinite block loop.
+if echo "$INPUT" | grep -q '"stop_hook_active" *: *true'; then
+  exit 0
+fi
+
 SESSION_STATE="${SESSION_STATE_PATH:-docs/session-state.md}"
 
 if [ ! -f "$SESSION_STATE" ]; then
@@ -51,7 +59,9 @@ if ! grep -q "## Next Steps" "$SESSION_STATE" 2>/dev/null; then
 fi
 
 if [ -n "$ERRORS" ]; then
-  echo -e "Handoff check found issues:\n${ERRORS}Please fix these before ending the session."
+  # Stop-hook stdout with exit 0 never reaches the model.
+  # decision:"block" blocks the stop and feeds reason back to Claude.
+  printf '{"decision":"block","reason":"Handoff check found issues:\\n%sPlease fix these before ending the session."}\n' "$ERRORS"
 fi
 
 exit 0

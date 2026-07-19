@@ -4,7 +4,7 @@
 # Three-tier alert system: 40% (warn) → 60% (alert) → 70% (hard stop).
 #
 # The 70% hard gate forces a session handoff — no exceptions.
-# Developed across dozens of real sessions — hard stops have saved work multiple times.
+# Thresholds calibrated from transcript sizes observed across dozens of sessions.
 #
 # Hook type: PostToolUse (matcher: ".*")
 # Timeout: 5s
@@ -41,14 +41,14 @@ WARN_THRESHOLD=400000
 ALERT_THRESHOLD=600000
 STOP_THRESHOLD=700000
 
+# additionalContext must sit directly under hookSpecificOutput —
+# any other nesting is silently ignored by the schema.
 if [ "$SIZE" -gt "$STOP_THRESHOLD" ]; then
   cat <<'EOF'
 {
   "hookSpecificOutput": {
     "hookEventName": "PostToolUse",
-    "decision": {
-      "additionalContext": "HARD STOP — Context exceeds 70%. You MUST do the following immediately. Do NOT continue any other work:\n1. Update session-state.md with current progress, decisions made, and next steps\n2. Stop all generation/development work\n3. Tell the user: 'Context is full. I recommend starting a new session. session-state.md has been updated.'\n\nThis is a hard gate. Continuing past this point risks losing work to context truncation."
-    }
+    "additionalContext": "HARD STOP — Context exceeds 70%. You MUST do the following immediately. Do NOT continue any other work:\n1. Update session-state.md with current progress, decisions made, and next steps\n2. Stop all generation/development work\n3. Tell the user: 'Context is full. I recommend starting a new session. session-state.md has been updated.'\n\nThis is a hard gate. Continuing past this point risks losing work to context truncation."
   }
 }
 EOF
@@ -57,9 +57,7 @@ elif [ "$SIZE" -gt "$ALERT_THRESHOLD" ]; then
 {
   "hookSpecificOutput": {
     "hookEventName": "PostToolUse",
-    "decision": {
-      "additionalContext": "Context is past 60%. Update session-state.md now to preserve progress. Finish your current task, then hand off. Do not start new tasks."
-    }
+    "additionalContext": "Context is past 60%. Update session-state.md now to preserve progress. Finish your current task, then hand off. Do not start new tasks."
   }
 }
 EOF
@@ -68,9 +66,7 @@ elif [ "$SIZE" -gt "$WARN_THRESHOLD" ]; then
 {
   "hookSpecificOutput": {
     "hookEventName": "PostToolUse",
-    "decision": {
-      "additionalContext": "Context is past 40%. Start thinking about wrap-up timing. Finish your current task and consider whether to hand off soon."
-    }
+    "additionalContext": "Context is past 40%. Start thinking about wrap-up timing. Finish your current task and consider whether to hand off soon."
   }
 }
 EOF

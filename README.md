@@ -15,7 +15,7 @@ Two hooks that monitor context usage and prevent silent progress loss:
 | Hook | Event | What it does |
 |------|-------|-------------|
 | `context-monitor.sh` | PostToolUse | Three-tier context alerts at 40% / 60% / 70%. Hard stop at 70% forces handoff. |
-| `pre-compact-reminder.sh` | PreCompact | Reminds AI to save state before context compression. |
+| `pre-compact-reminder.sh` | PreCompact | Shows the user a reminder to save state before context compression. |
 
 ### [Session Handoff](session-handoff/)
 
@@ -66,7 +66,7 @@ These hooks were developed during a real project — a mobile game built from sc
 
 - **Hours saved** — no more manually rebuilding context at the start of every session
 - **Forgotten handoffs caught** — the handoff validator flags incomplete session-state.md files that would cause the next session to start blind
-- **Hard stops that saved work** — the context monitor forced handoffs at 70% that would otherwise have lost in-progress work to context truncation
+- **A hard stop before truncation** — the context monitor forces a handoff at 70%, before in-progress work is lost to context truncation
 
 ## How it works
 
