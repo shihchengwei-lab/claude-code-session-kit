@@ -57,4 +57,9 @@ Add to `.claude/settings.local.json`:
 
 ## How thresholds were calibrated
 
-The 400/600/700KB thresholds are based on observed transcript sizes across dozens of sessions. They're conservative — you'll get warnings before things get critical. If you're using a model with a larger context window, you may want to raise them.
+The 400/600/700KB base thresholds are based on observed transcript sizes across dozens of sessions, calibrated for a ~200k-token context window. They're conservative — you'll get warnings before things get critical.
+
+Two caveats worth knowing:
+
+- **Larger context windows**: set `WINDOW_SCALE` in `context-monitor.sh` to match your model (e.g. `5` for a 1M-token window). Left at `1`, the hard gate fires while real usage is still low — observed in practice: ~18% actual usage flagged as "over 70%" on a 1M-window session.
+- **Compaction**: the transcript file never shrinks — `/compact` frees the model's context but keeps appending to the same file. `pre-compact-reminder.sh` records the file size at each compaction and `context-monitor.sh` subtracts it, so alerts measure growth since the last compaction instead of firing forever once the raw file passes a threshold. This only works if both hooks are installed.

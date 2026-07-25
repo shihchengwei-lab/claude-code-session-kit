@@ -157,11 +157,13 @@ Set the `SESSION_STATE_PATH` environment variable:
 
 **Adjust context thresholds:**
 
-Edit `context-monitor.sh` lines 38-40:
+Edit the threshold block in `context-monitor.sh`:
 ```bash
-WARN_THRESHOLD=400000    # 40% — early warning
-ALERT_THRESHOLD=600000   # 60% — wrap up soon
-STOP_THRESHOLD=700000    # 70% — hard stop, must hand off
+WINDOW_SCALE=1           # set to match your model's context window
+                         # (base values assume ~200k tokens; use 5 for 1M)
+WARN_THRESHOLD=$((400000 * WINDOW_SCALE))    # 40% — early warning
+ALERT_THRESHOLD=$((600000 * WINDOW_SCALE))   # 60% — wrap up soon
+STOP_THRESHOLD=$((700000 * WINDOW_SCALE))    # 70% — hard stop, must hand off
 ```
 
 **Change handoff validation sections:**
